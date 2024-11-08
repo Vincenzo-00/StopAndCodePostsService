@@ -1,0 +1,8 @@
+<h2>Preferiti</h2>
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let p of postService.preferiti">
+        {{ p.title }}
+        <button type="button" class="btn btn-close" (click)="postService.rimuoviDaPreferitit(p)"></button>
+    </li>
+</ul>
+<button type="button" class="btn btn-danger" *ngIf="postService.preferiti!.length > 0" (click)="postService.svuotaPreferiti()">Svuota</button>

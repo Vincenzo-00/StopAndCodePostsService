@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Post } from '../../models/post';
 import { PostsService } from '../../services/posts.service';
-import { Blog } from '../../models/post';
-import { BLOG } from '../../data/blog';
 
 @Component({
   selector: 'app-detail-post',
   templateUrl: './detail-post.component.html',
   styleUrl: './detail-post.component.css'
 })
-export class DetailPostComponent implements OnInit {
-  blog: Blog = BLOG;
+export class DetailPostComponent implements OnInit{
+  @Input()
+  post?: Post;
 
-  constructor(private postsServices: PostsService) {
+  constructor(public postService: PostsService) {
 
   }
   ngOnInit(): void {
-    this.blog.posts = this.postsServices.getPosts();
-    this.blog.postCategories = this.postsServices.getCategories();
+    
   }
+  
 
 }

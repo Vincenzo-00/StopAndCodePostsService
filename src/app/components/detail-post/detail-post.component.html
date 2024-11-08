@@ -1,3 +1,16 @@
-<pre>
-    {{ blog | json }}
-</pre>
+<div class="card" *ngIf="post">
+  <h5 class="card-header">
+    {{ post.title }}
+  </h5>
+  <div class="card-body">
+    <p class="card-text">{{ post.category }}</p>
+    <p class="card-text">Data pubblicazione: {{ post.date | date }}</p>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="postService.addFavourite(post)"
+    >
+      Aggiungi ai preferiti
+    </button>
+  </div>
+</div>
