@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BLOG } from '../data/blog';
-import { Blog, Post } from '../models/post';
+import { Blog, Post, PostCategory } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,18 @@ export class PostsService {
 
   preferiti?: Post[] = [];
 
+  selectedCategory?: PostCategory;
+
   constructor() { }
 
   getPosts() {
+    this.selectedCategory = undefined;
     return this.blog.posts;
+  }
+
+  getPostsByCategory(category: PostCategory) {
+    this.selectedCategory = category;
+    return this.blog.posts.filter(x => x.category == this.selectedCategory!.id)
   }
 
   getCategories() {
@@ -23,7 +31,7 @@ export class PostsService {
   addFavourite(post: Post) {
     let p = this.preferiti?.find(x => x.id == post.id);
 
-    if(!p) {
+    if (!p) {
       this.preferiti!.push(post)
     }
   }
@@ -31,7 +39,7 @@ export class PostsService {
   rimuoviDaPreferitit(post: Post) {
     let p = this.preferiti?.find(x => x.id == post.id);
 
-    if(p) {
+    if (p) {
       this.preferiti!.splice(this.preferiti!.indexOf(p), 1)
     }
   }

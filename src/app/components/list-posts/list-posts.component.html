@@ -1,19 +1,21 @@
-<div class="container">
-    <h1>Posts</h1>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnTutti" autocomplete="off" checked>
-        <label class="btn btn-outline-primary" for="btnTutti">Tutti</label>
-      
-        <input type="radio" class="btn-check" name="btnradio" id="viaggi" autocomplete="off">
-        <label class="btn btn-outline-primary" for="viaggi">Radio 2</label>
-      
-        <input type="radio" class="btn-check" name="btnradio" id="cucina" autocomplete="off">
-        <label class="btn btn-outline-primary" for="cucina">Radio 3</label>
-
-        <input type="radio" class="btn-check" name="btnradio" id="moda" autocomplete="off">
-        <label class="btn btn-outline-primlary" for="moda">Radio 3</label>
-    </div>
-    <div class="container">
-        <app-detail-post *ngFor="let p of posts" [post]="p"></app-detail-post>
-    </div>
+<h2>Posts</h2>
+<div class="btn-group mb-2" role="group">
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    (click)="filter(undefined)"
+    [ngClass]="{ active: postService.selectedCategory == undefined }"
+  >
+    Tutti
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    *ngFor="let c of postService.getCategories()"
+    (click)="filter(c)"
+    [ngClass]="{ active: postService.selectedCategory == c }"
+  >
+    {{ c.title }}
+  </button>
 </div>
+<app-detail-post *ngFor="let p of posts" [post]="p"></app-detail-post>

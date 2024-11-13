@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
-import { Post } from '../../models/post';
+import { Post, PostCategory } from '../../models/post';
 
 @Component({
   selector: 'app-list-posts',
@@ -15,5 +15,13 @@ export class ListPostsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.posts = this.postService.getPosts();
+  }
+
+  filter(category?: PostCategory) {
+    if (!category) {
+      this.posts = this.postService.getPosts();
+    } else {
+      this.posts = this.postService.getPostsByCategory(category);
+    }
   }
 }
